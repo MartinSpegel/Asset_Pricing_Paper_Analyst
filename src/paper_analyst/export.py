@@ -125,3 +125,15 @@ def export_obsidian(items: list[tuple[Paper, ResearchMemo | None]], vault_dir: s
     idx_path.write_text("\n".join(index) + "\n", encoding="utf-8")
     written.append(idx_path)
     return written
+
+
+def export_report(paper: Paper, report, vault_dir: str | Path, folder: str = "Reports") -> Path:
+    """Write a deep report as an Obsidian note linked to the paper note."""
+    from .report import render_report
+    root = Path(vault_dir)
+    (root / folder).mkdir(parents=True, exist_ok=True)
+    path = root / folder / f"{note_name(paper)} - report.md"
+    body = render_report(report, paper)
+    body += f"\n\nPaper note: [[Papers/{note_name(paper)}]]\n"
+    path.write_text(body, encoding="utf-8")
+    return path
