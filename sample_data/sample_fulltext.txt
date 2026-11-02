@@ -1,0 +1,23 @@
+SYNTHETIC DEMO TEXT - not a real paper.
+
+Transfer Learning Across Equity Markets: Estimating Stochastic Discount Factors in Data-Scarce Countries
+
+1. Introduction
+
+Many international equity markets have short and noisy return histories. We study whether information from the U.S. equity market can improve the estimation of stochastic discount factors in international markets with short return histories.
+
+2. Method
+
+We propose a transfer learning approach in which a neural network SDF is pre-trained on U.S. stock returns and fine-tuned on each target country. The fine-tuning step penalises deviations from the source-market weights.
+
+3. Data
+
+Our sample covers monthly returns of stocks in 32 developed and emerging markets from 1990 to 2022. Firm characteristics are standardised cross-sectionally within each country and month.
+
+4. Results
+
+We find that the transferred SDF reduces out-of-sample pricing errors by 18% relative to a model estimated on local data only. The gains are largest in emerging markets, consistent with the view that partial market integration allows common risk premia to be learned from a data-rich source market.
+
+5. Limitations
+
+However, the benefits are weaker for markets with low integration with the U.S. Our analysis does not account for transaction costs.

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:arxiv="http://arxiv.org/schemas/atom"
+      xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">
+  <title type="html">ArXiv Query: synthetic demo feed</title>
+  <opensearch:totalResults>3</opensearch:totalResults>
+  <entry>
+    <id>http://arxiv.org/abs/9901.00001v2</id>
+    <updated>2024-03-15T00:00:00Z</updated>
+    <published>2024-03-15T00:00:00Z</published>
+    <title>Transfer Learning Across Equity Markets: Estimating Stochastic Discount Factors in Data-Scarce Countries</title>
+    <summary>  We study whether information from the U.S. equity market can improve the estimation of stochastic discount factors in international markets with short return histories. We propose a transfer learning approach in which a neural network SDF is pre-trained on U.S. stock returns and fine-tuned on each target country. Our sample covers monthly returns of stocks in 32 developed and emerging markets from 1990 to 2022. We find that the transferred SDF reduces out-of-sample pricing errors by 18% relative to a model estimated on local data only, and the tangency portfolio implied by the SDF achieves an annualized Sharpe ratio of 1.1. The gains are largest in emerging markets, consistent with the view that partial market integration allows common risk premia to be learned from a data-rich source market. However, the benefits are weaker for markets with low integration with the U.S. Our results suggest that transfer learning is a practical tool for international asset pricing when local data are scarce.
+    </summary>
+    <author><name>Ada Lindqvist</name></author><author><name>Tomas Herrera</name></author>
+    <arxiv:doi>10.5555/apa-demo.0001</arxiv:doi>
+    <link href="http://arxiv.org/abs/9901.00001v2" rel="alternate" type="text/html"/>
+    <link title="pdf" href="http://arxiv.org/pdf/9901.00001v2" rel="related" type="application/pdf"/>
+    <arxiv:primary_category term="q-fin.PR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="q-fin.PR" scheme="http://arxiv.org/schemas/atom"/><category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/9901.00003v1</id>
+    <updated>2022-11-20T00:00:00Z</updated>
+    <published>2022-11-20T00:00:00Z</published>
+    <title>Deep Pricing Kernels and the Cross-Section of International Stock Returns</title>
+    <summary>  We estimate a nonlinear pricing kernel for international stock returns with a deep neural network that enforces the no-arbitrage condition. The model is estimated with a generalized method of moments objective on a panel of stocks from 23 developed markets. We show that a single global SDF explains a large share of the cross-section of expected returns in developed markets, while country-specific factors remain important for Japan. The results highlight the importance of nonlinear interactions between firm characteristics.
+    </summary>
+    <author><name>Laura Becker</name></author><author><name>Rahul Iyer</name></author>
+    
+    <link href="http://arxiv.org/abs/9901.00003v1" rel="alternate" type="text/html"/>
+    <link title="pdf" href="http://arxiv.org/pdf/9901.00003v1" rel="related" type="application/pdf"/>
+    <arxiv:primary_category term="q-fin.PR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="q-fin.PR" scheme="http://arxiv.org/schemas/atom"/><category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/9901.00004v3</id>
+    <updated>2025-01-10T00:00:00Z</updated>
+    <published>2025-01-10T00:00:00Z</published>
+    <title>Conditional Factor Models with Domain-Adapted Neural Networks</title>
+    <summary>  We introduce a domain adaptation framework for conditional factor models in which an autoencoder learns latent factors in a source market and adapts them to a target market with a different distribution of firm characteristics. Using stocks from the United States as source and from Europe as target between 2000 and 2023, we document that domain-adapted factors reduce pricing errors relative to factors learned on the target market alone. However, the approach is computationally intensive and its performance is sensitive to the choice of source market.
+    </summary>
+    <author><name>Sofia Rossi</name></author><author><name>Tomas Herrera</name></author>
+    
+    <link href="http://arxiv.org/abs/9901.00004v3" rel="alternate" type="text/html"/>
+    <link title="pdf" href="http://arxiv.org/pdf/9901.00004v3" rel="related" type="application/pdf"/>
+    <arxiv:primary_category term="q-fin.ST" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="q-fin.ST" scheme="http://arxiv.org/schemas/atom"/><category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+  </entry>
+</feed>

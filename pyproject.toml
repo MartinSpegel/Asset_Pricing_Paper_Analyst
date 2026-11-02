@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "paper-analyst"
+version = "0.1.0"
+description = "Academic working-paper analyst for empirical asset pricing and ML in finance"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = ["requests>=2.28"]
+
+[project.optional-dependencies]
+claude = ["anthropic>=1.0"]
+dev = ["pytest>=7"]
+
+[project.scripts]
+paper-analyst = "paper_analyst.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+paper_analyst = ["mock_data/*.json", "mock_data/*.xml"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

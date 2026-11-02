@@ -1,0 +1,136 @@
+{
+ "total": 5,
+ "offset": 0,
+ "data": [
+  {
+   "paperId": "s2demo0001",
+   "title": "Transfer Learning Across Equity Markets: Estimating Stochastic Discount Factors in Data-Scarce Countries",
+   "abstract": "We study whether information from the U.S. equity market can improve the estimation of stochastic discount factors in international markets with short return histories. We propose a transfer learning approach in which a neural network SDF is pre-trained on U.S. stock returns and fine-tuned on each target country. Our sample covers monthly returns of stocks in 32 developed and emerging markets from 1990 to 2022. We find that the transferred SDF reduces out-of-sample pricing errors by 18% relative to a model estimated on local data only, and the tangency portfolio implied by the SDF achieves an annualized Sharpe ratio of 1.1. The gains are largest in emerging markets, consistent with the view that partial market integration allows common risk premia to be learned from a data-rich source market. However, the benefits are weaker for markets with low integration with the U.S. Our results suggest that transfer learning is a practical tool for international asset pricing when local data are scarce.",
+   "authors": [
+    {
+     "authorId": "0",
+     "name": "Ada Lindqvist"
+    },
+    {
+     "authorId": "1",
+     "name": "Tomas Herrera"
+    }
+   ],
+   "year": 2024,
+   "publicationDate": "2024-03-15",
+   "externalIds": {
+    "DOI": "10.5555/APA-DEMO.0001",
+    "ArXiv": "9901.00001"
+   },
+   "url": "https://www.semanticscholar.org/paper/s2demo0001",
+   "venue": "Demo Journal of Financial Econometrics",
+   "openAccessPdf": null,
+   "fieldsOfStudy": [
+    "Economics",
+    "Computer Science"
+   ]
+  },
+  {
+   "paperId": "s2demo0002",
+   "title": "Return Predictability Around the World: A Machine Learning Perspective",
+   "abstract": null,
+   "authors": [
+    {
+     "authorId": "0",
+     "name": "Mei Watanabe"
+    },
+    {
+     "authorId": "1",
+     "name": "Kofi Mensah"
+    },
+    {
+     "authorId": "2",
+     "name": "Ada Lindqvist"
+    }
+   ],
+   "year": 2023,
+   "publicationDate": "2023-06-01",
+   "externalIds": {
+    "DOI": "https://doi.org/10.5555/apa-demo.0002"
+   },
+   "url": "https://www.semanticscholar.org/paper/s2demo0002",
+   "venue": "Demo Review of Asset Pricing Studies",
+   "openAccessPdf": null,
+   "fieldsOfStudy": [
+    "Economics",
+    "Computer Science"
+   ]
+  },
+  {
+   "paperId": "s2demo0003",
+   "title": "Deep pricing kernels and the cross section of international stock returns",
+   "abstract": "We estimate a nonlinear pricing kernel for international stock returns with a deep neural network that enforces the no-arbitrage condition. The model is estimated with a generalized method of moments objective on a panel of stocks from 23 developed markets. We show that a single global SDF explains a large share of the cross-section of expected returns in developed markets, while country-specific factors remain important for Japan. The results highlight the importance of nonlinear interactions between firm characteristics.",
+   "authors": [
+    {
+     "authorId": "0",
+     "name": "Laura Becker"
+    },
+    {
+     "authorId": "1",
+     "name": "Rahul Iyer"
+    }
+   ],
+   "year": 2022,
+   "publicationDate": "2022-11-20",
+   "externalIds": {},
+   "url": "https://www.semanticscholar.org/paper/s2demo0003",
+   "venue": "arXiv",
+   "openAccessPdf": null,
+   "fieldsOfStudy": [
+    "Economics",
+    "Computer Science"
+   ]
+  },
+  {
+   "paperId": "s2demo0006",
+   "title": "Out-of-Sample Equity Premium Forecasts and Investor Sentiment",
+   "abstract": "We investigate whether investor sentiment improves equity premium forecasts. We find modest out-of-sample gains for return predictability that disappear after 2008.",
+   "authors": [
+    {
+     "authorId": "0",
+     "name": "Kofi Mensah"
+    }
+   ],
+   "year": 2016,
+   "publicationDate": "2016-09-01",
+   "externalIds": {
+    "DOI": "10.5555/apa-demo.0006"
+   },
+   "url": "https://www.semanticscholar.org/paper/s2demo0006",
+   "venue": "Demo Finance Quarterly",
+   "openAccessPdf": null,
+   "fieldsOfStudy": [
+    "Economics",
+    "Computer Science"
+   ]
+  },
+  {
+   "paperId": "s2demo0008",
+   "title": "Machine Learning for Credit Card Fraud Detection",
+   "abstract": "We apply gradient boosting to detect fraudulent transactions.",
+   "authors": [
+    {
+     "authorId": "0",
+     "name": "Jane Placeholder"
+    }
+   ],
+   "year": 2023,
+   "publicationDate": "2023-02-14",
+   "externalIds": {
+    "DOI": "10.5555/apa-demo.0008"
+   },
+   "url": "https://www.semanticscholar.org/paper/s2demo0008",
+   "venue": "Demo Applied Computing",
+   "openAccessPdf": null,
+   "fieldsOfStudy": [
+    "Economics",
+    "Computer Science"
+   ]
+  }
+ ]
+}
