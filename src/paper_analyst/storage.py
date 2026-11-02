@@ -48,6 +48,35 @@ CREATE TABLE IF NOT EXISTS analyses (
     created_at TEXT NOT NULL
 );
 CREATE INDEX IF NOT EXISTS ix_analyses_paper ON analyses(paper_id);
+
+-- Full-text documents (extracted PDF / text with page + section locators)
+CREATE TABLE IF NOT EXISTS documents (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    paper_id INTEGER NOT NULL REFERENCES papers(id) ON DELETE CASCADE,
+    source_path TEXT,
+    source_type TEXT NOT NULL,
+    sha256 TEXT,
+    num_pages INTEGER,
+    extractor TEXT NOT NULL,
+    warnings TEXT NOT NULL DEFAULT '[]',
+    document_json TEXT NOT NULL,
+    created_at TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS ix_documents_paper ON documents(paper_id);
+
+-- Deep research reports (10-section, traceable)
+CREATE TABLE IF NOT EXISTS reports (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    paper_id INTEGER NOT NULL REFERENCES papers(id) ON DELETE CASCADE,
+    analyzer TEXT NOT NULL,
+    model TEXT,
+    profile TEXT,
+    document_sha256 TEXT,
+    report_json TEXT NOT NULL,
+    report_markdown TEXT NOT NULL,
+    created_at TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS ix_reports_paper ON reports(paper_id);
 """
 
 _JSON_FIELDS = ("authors", "urls", "sources", "topics", "relevance_breakdown")
@@ -187,6 +216,37 @@ class Store:
                 " VALUES (?, ?, ?, ?, ?, ?)",
                 (pid, analyzer, model, json.dumps(memo_json), markdown, _now()))
         return int(cur.lastrowid)
+
+    # ---- full-text documents and deep reports ---------------------------
+    def save_document(self, pid: int, doc) -> int:
+        with self.conn:
+            cur = self.conn.execute(
+                "INSERT INTO documents (paper_id, source_path, source_type, sha256, num_pages, extractor, warnings,"
+                " document_json, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                (pid, doc.source_path, doc.source_type, doc.sha256, doc.num_pages, doc.extractor,
+                 json.dumps(doc.warnings), json.dumps(doc.to_dict()), _now()))
+        return int(cur.lastrowid)
+
+    def latest_document(self, pid: int):
+        from .fulltext.model import Document
+        row = self.conn.execute("SELECT document_json FROM documents WHERE paper_id = ? ORDER BY id DESC LIMIT 1",
+                                (pid,)).fetchone()
+        return Document.from_dict(json.loads(row[0])) if row else None
+
+    def save_report(self, pid: int, report, markdown: str) -> int:
+        with self.conn:
+            cur = self.conn.execute(
+                "INSERT INTO reports (paper_id, analyzer, model, profile, document_sha256, report_json,"
+                " report_markdown, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                (pid, report.analyzer, report.model, report.profile, report.source_sha256,
+                 json.dumps(report.to_dict()), markdown, _now()))
+        return int(cur.lastrowid)
+
+    def latest_report(self, pid: int):
+        from .report import DeepReport
+        row = self.conn.execute("SELECT report_json FROM reports WHERE paper_id = ? ORDER BY id DESC LIMIT 1",
+                                (pid,)).fetchone()
+        return DeepReport.from_dict(json.loads(row[0])) if row else None
 
     def latest_analysis(self, pid: int) -> dict | None:
         row = self.conn.execute(

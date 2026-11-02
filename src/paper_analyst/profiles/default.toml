@@ -1,0 +1,144 @@
+# Research profile used by deep analysis to judge how a paper connects to YOUR agenda.
+#
+# For every theme the analyst separates:
+#   concept_terms        - vocabulary that merely *mentions* the theme (keyword overlap)
+#   substantive_patterns - regexes indicating the paper actually *does* something on the theme
+#                          (estimates, tests, uses data or methods); only counted in the paper's
+#                          core sections (theory/data/methodology/results/robustness/appendix)
+# A theme is a "genuine" connection only if substantive patterns occur in core sections;
+# mentions confined to the introduction, literature review, conclusion or references are
+# reported as "superficial". Edit freely, or copy this file and pass --profile path.toml.
+
+name = "International asset pricing, SDFs and transfer learning"
+description = """Empirical asset pricing in global equity markets: estimating stochastic discount
+factors and pricing kernels, cross-country return predictability, and machine/transfer learning,
+with emphasis on economic interpretation and credible empirical identification."""
+
+# Thresholds for the connection assessment.
+[assessment]
+genuine_min_core_kinds = 2      # substantive hits in >= this many distinct core section kinds ...
+genuine_min_core_hits = 3       # ... or at least this many substantive hits in methodology+results
+partial_min_core_hits = 1
+
+[[themes]]
+key = "international"
+name = "International asset pricing and global equity markets"
+concept_terms = ["international", "global", "cross-country", "country", "countries", "emerging market",
+                 "developed market", "integration", "segmentation", "currency", "exchange rate", "home bias"]
+substantive_patterns = [
+  '\b\d+\s+(international\s+|developed\s+|emerging\s+|developed and emerging\s+)?(countries|equity markets|markets|stock markets)\b',
+  '\b(country|countries)[- ](specific|level|by[- ]country)\b',
+  '\b(market|financial) (integration|segmentation)\b',
+  '\b(integrated|segmented) (markets?|benchmarks?)\b',
+  '\b(global|world|local) (factors?|sdf|pricing kernel|market portfolio|risk premi(a|um))\b',
+  '\bcurrency (risk|returns?|hedg)',
+  '\bin (u\.s\.|us) dollars\b',
+  '\b(emerging|developed) markets?\b.{0,80}\b(pric|return|premi|error|sdf)',
+]
+questions = [
+  "Do pricing kernels estimated in one market price assets in others?",
+  "How does partial integration show up in SDF parameters across countries?",
+]
+
+[[themes]]
+key = "sdf"
+name = "Stochastic discount factors and pricing kernels"
+concept_terms = ["stochastic discount factor", "pricing kernel", "sdf", "discount factor", "asset pricing model",
+                 "factor model", "risk premia", "risk premium"]
+substantive_patterns = [
+  '\b(estimat|learn|construct|project)\w*\b.{0,60}\b(sdf|stochastic discount factor|pricing kernel)s?\b',
+  '\b(sdf|stochastic discount factor|pricing kernel)s?\b.{0,60}\b(weights?|loadings?|estimat|projected|implied)',
+  '\b(fundamental|euler|asset) pricing equation\b',
+  '\bE\s*\[\s*M',
+  '\bpricing errors?\b',
+  '\bhansen[- ]jagannathan\b',
+  '\bno[- ]arbitrage (condition|restriction)\b',
+  '\btangency portfolio\b',
+  '\b(generalized method of moments|gmm)\b',
+]
+questions = [
+  "Which economic restrictions should a machine-learned SDF satisfy?",
+  "How stable are SDF weights out of sample and across markets?",
+]
+
+[[themes]]
+key = "ml_transfer"
+name = "Machine learning and transfer learning"
+concept_terms = ["machine learning", "neural network", "deep learning", "transfer learning", "random forest",
+                 "boosting", "lasso", "fine-tune", "pre-train", "domain adaptation"]
+substantive_patterns = [
+  '\b(neural network|feed-forward|autoencoder|transformer|random forest|gradient boost\w*|lasso|elastic net)\b.{0,80}\b(train|estimat|fit|layer|predict|weights?)',
+  '\b(train|estimat|fit)\w*\b.{0,60}\b(neural network|network|model)\b',
+  '\b(pre-?train\w*|fine-?tun\w*|domain adaptation|transfer(red)? (learning|representation|sdf|model))\b',
+  '\b(hyperparameters?|validation sample|cross-validation|early[- ]stopping|learning rate|hidden layers?)\b',
+]
+questions = [
+  "When does pre-training on data-rich markets help in data-scarce markets?",
+  "How should fine-tuning be regularized toward economically meaningful structure?",
+]
+
+[[themes]]
+key = "predictability"
+name = "Cross-country return predictability"
+concept_terms = ["return predictability", "predictability", "forecast", "predict", "equity premium", "market timing"]
+substantive_patterns = [
+  '\bpredictive regressions?\b',
+  '\b(forecast|predict)\w*\s+(future\s+|excess\s+|stock\s+|market\s+|equity\s+)?(returns|equity premium|premium)\b',
+  '\bout-of-sample\s+r\s*(\^?2|-?squared)\b',
+  '\b(r2|r-squared|r squared)\b.{0,40}\b(oos|out-of-sample)\b',
+  '\bmarket timing\b',
+  '\breturn predictability\b.{0,80}\b(across|in \d+|countries|markets)\b',
+]
+questions = [
+  "Is predictability common across countries or driven by local frictions?",
+]
+
+[[themes]]
+key = "identification"
+name = "Economic interpretation and empirical identification"
+concept_terms = ["identification", "mechanism", "channel", "economic interpretation", "causal", "exogenous",
+                 "economically significant", "risk-based", "mispricing"]
+substantive_patterns = [
+  '\bidentif\w*\b.{0,80}\b(comes from|relies on|exploit|variation|comparing|assumption)',
+  '\b(instrument(al)? variables?|exogenous (variation|shock)|difference-in-differences|natural experiment|placebo)\b',
+  '\b(economic )?mechanism is\b',
+  '\bconsistent with\b.{0,80}\b(integration|risk|mispricing|friction|limits to arbitrage|segmentation)',
+  '\b(standard errors?|t-statistic|bootstrap|newey-west|clustered)\b',
+  '\bholding\b.{0,60}\bfixed\b',
+]
+questions = [
+  "Is the economic mechanism identified, or only consistent with the evidence?",
+]
+
+# Speculative extension templates. An idea is proposed when every theme in `requires`
+# has a genuine/partial connection and every theme in `lacks` is superficial/absent.
+# Ideas are always labelled SPECULATIVE in reports and must not contain numbers.
+[[extensions]]
+requires = ["sdf"]
+lacks = ["international"]
+idea = "Test whether the estimated SDF prices assets outside the estimation market, for example in emerging equity markets, and relate failures to measures of market segmentation."
+
+[[extensions]]
+requires = ["sdf", "international"]
+lacks = ["ml_transfer"]
+idea = "Replace the parametric SDF with a regularized nonlinear model and use transfer learning from data-rich to data-scarce countries."
+
+[[extensions]]
+requires = ["ml_transfer", "sdf"]
+lacks = ["predictability"]
+idea = "Check whether the transferred representation also improves out-of-sample return forecasts across countries, linking SDF estimation to cross-country predictability."
+
+[[extensions]]
+requires = ["ml_transfer", "international"]
+lacks = []
+idea = "Characterize which country characteristics (integration, liquidity, sample length) govern the benefit of transfer, ideally with variation that is plausibly exogenous to expected returns."
+
+[[extensions]]
+requires = ["predictability", "international"]
+lacks = ["sdf"]
+idea = "Ask whether the documented predictability is consistent with a common international SDF or requires country-specific pricing kernels."
+
+[[extensions]]
+requires = ["ml_transfer"]
+lacks = ["identification"]
+idea = "Design an evaluation that separates the contribution of the learning method from data-snooping and specification search, e.g. with pre-registered validation splits."
